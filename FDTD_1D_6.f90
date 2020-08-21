@@ -65,16 +65,6 @@ Print*,"================================"
 Print*,"M_S (Matrix Size)=",M_S
 Print*,"C_S (Cell Size)=",C_S
 Print*,"E_v (velocity) [m/s]=", E_v
-
-!Print*,"Wavelength=",E_v*N*T_D/(C_S*k) 
-!                         C(velocity of light) x N (number of time step) x T_D 
-!         Wavelength = ----------------------------------------------------------
-!                             C_S (Cell size) x k (number of wavelength)
-!
-!         d = C X N X T_D (Total wave from distance)
-!         d/k (distance of a wavelength)
-!         N x T_D    (travleing time)
-
 Print*,"T_D (Time Difference) [s] ",T_D
 Print*,"N (Number of time_step)",N
 Print*,"Frequency [Hz]=", f
@@ -162,7 +152,6 @@ Open (unit=24,file="FDTD_1D_H1.txt",status='replace')
           E_z(0) = 0
      
        End If
-
 !===========================================================================
 
 

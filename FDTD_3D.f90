@@ -1,7 +1,7 @@
 PROGRAM FDTD_3D
 IMPLICIT NONE
 
-!!
+!!!
 
 INTEGER :: a = 0   !!X coordinate
 INTEGER :: i = 0

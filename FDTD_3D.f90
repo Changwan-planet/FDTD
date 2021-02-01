@@ -21,27 +21,27 @@ REAL*8,  PARAMETER :: f = 5.0d+6   !Frequency
 !     +++++++++
 !++++++E-FIELD++++++
 !     +++++++++ 
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: E_x = 0.0d+0
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: E_y = 0.0d+0
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: E_z = 0.0d+0
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: E_x = 0.0d+0
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: E_y = 0.0d+0
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: E_z = 0.0d+0
 
 
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: J_x = 0.0d+0    !Independent source
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: J_y = 0.0d+0    !Independent source
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: J_z = 0.0d+0    !Independent source
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: J_x = 0.0d+0    !Independent source
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: J_y = 0.0d+0    !Independent source
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: J_z = 0.0d+0    !Independent source
 
 
 !     +++++++++
 !++++++H-FIELD++++++
 !     +++++++++
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: H_x = 0.0d+0
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: H_y = 0.0d+0
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: H_z = 0.0d+0
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: H_x = 0.0d+0
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: H_y = 0.0d+0
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: H_z = 0.0d+0
 
 
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: M_x = 0.0d+0    !Independent source 
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: M_y = 0.0d+0    !Independent source 
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: M_z = 0.0d+0    !Independent source 
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: M_x = 0.0d+0    !Independent source 
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: M_y = 0.0d+0    !Independent source 
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: M_z = 0.0d+0    !Independent source 
 
 
 !As for x-directed, z-polarized TEM mode, M_source=0 for all time
@@ -50,14 +50,14 @@ REAL*8, PARAMETER :: pi=Acos(-1.0)
 !     ++++++++++++++++++++
 !++++++Material Propertiy++++++
 !     ++++++++++++++++++++
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S), PARAMETER :: Conduct = 0.0d+0
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2), PARAMETER :: Conduct = 0.0d+0
 
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S), PARAMETER :: Magloss = 0.0d+0                  !Magnetic loss  
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2), PARAMETER :: Magloss = 0.0d+0                  !Magnetic loss  
     
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S), PARAMETER :: Permit = 8.854*(10.0)**(-12) !Permitivity  Free space=1/(36*pi))*10**(-9) 
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2), PARAMETER :: Permit = 8.854*(10.0)**(-12) !Permitivity  Free space=1/(36*pi))*10**(-9) 
 !REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S), PARAMETER :: Permit = 8 
    
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S), PARAMETER :: Permeat = (4.0*pi)*(10.0)**(-7) !Permeativity Free space=(4*pi)*10**(-7) 
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2), PARAMETER :: Permeat = (4.0*pi)*(10.0)**(-7) !Permeativity Free space=(4*pi)*10**(-7) 
    
 !Lunar environment!
 !Real, Parameter :: Conduct = 7*10**(-4)!! Conductivity  
@@ -67,38 +67,38 @@ REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S), PARAMETER :: Permeat = (4.0*pi)*(10.0)**
 !     +++++++++
 !++++++SI unit++++++
 !     +++++++++
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S)  :: E_v 
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2)  :: E_v 
 REAL*8, PARAMETER :: C_S = 3.0                              ![m]
-REAL*8, PARAMETER :: T_D = 1.0d-9                           ![s]
+REAL*8, PARAMETER :: T_S = 1.0d-9                           ![s]
 
 
-REAL*8  ::  pp1 = (1.0d-5)/T_D
-REAL*8  ::  pp2 = (1.0d-4-1.d-5)/T_D
-REAL*8  ::  pp3 = (1.0d-4)/T_D
+REAL*8  ::  pp1 = (1.0d-5)/T_S
+REAL*8  ::  pp2 = (1.0d-4-1.d-5)/T_S
+REAL*8  ::  pp3 = (1.0d-4)/T_S
 
 
 !     +++++++++++++++++++
 !++++++E-Filed Component++++++
 !     +++++++++++++++++++    
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: C_a 
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: C_b 
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: C_a 
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: C_b 
 
 
 !     +++++++++++++++++++
 !++++++H-Field Component++++++
 !     +++++++++++++++++++
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: D_a 
-REAL*8, DIMENSION(0:M_S, 0:M_S, 0:M_S) :: D_b 
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: D_a 
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: D_b 
 
 
 
 E_v = 1.0 / sqrt(Permit* Permeat)
 
-C_a = (1.0-((Conduct*T_D)/(2.0*Permit))) / (1.0+((Conduct*T_D)/(2.0*Permit)))
-C_b = (T_D/(Permit*C_S)) / (1.0+(Conduct*T_D/(2.0*Permit)))
+C_a = (1.0-((Conduct*T_S)/(2.0*Permit))) / (1.0+((Conduct*T_S)/(2.0*Permit)))
+C_b = (T_S/(Permit*C_S)) / (1.0+(Conduct*T_S/(2.0*Permit)))
 
-D_a = (1.0-((Magloss*T_D)/(2.0*Permeat))) / (1.0+((Magloss*T_D)/(2.0*Permeat)))
-D_b = (T_D/(Permeat*C_S)) / (1.0+(Magloss*T_D/(2.0*Permeat)))
+D_a = (1.0-((Magloss*T_S)/(2.0*Permeat))) / (1.0+((Magloss*T_S)/(2.0*Permeat)))
+D_b = (T_S/(Permeat*C_S)) / (1.0+(Magloss*T_S/(2.0*Permeat)))
  
     
 PRINT*,"Permit(1,1,1)",Permit(1,1,1)
@@ -106,8 +106,8 @@ PRINT*,"Permeat(1,1,1)",Permeat(1,1,1)
 PRINT*,"Conduct(1,1,1)",Conduct(1,1,1)
 PRINT*,"Magloss(1,1,1)",Magloss(1,1,1)
 PRINT*,"================================"
-PRINT*,"C_a(1,1,1)",C_a(1,1,1)
-PRINT*,"C_b(1,1,1)",C_b(2,2,2)
+PRINT*,"C_a(0,0,0)",C_a(0,0,0)
+PRINT*,"C_b(0,0,0)",C_b(0,0,0)
 PRINT*,"D_a(1,1,1)",D_a(3,3,3)
 PRINT*,"D_b(1,1,1)",D_b(4,4,4)
 PRINT*,"================================"
@@ -124,11 +124,11 @@ PRINT*,"E_v(1,1,1) (velocity) [m/s]=", E_v(1,1,1)
 !         d/k (distance of a wavelength)
 !         N x T_D    (travleing time)
 
-PRINT*,"T_D (Time Difference) [s] ",T_D
+PRINT*,"T_S (Time Difference) [s] ",T_S
 PRINT*,"N (Number of time_step)",N
 PRINT*,"Frequency [Hz]=", f
 PRINT*,"Wavelength (Distance of one period)",E_v(1,1,1)/f
-Print*,"Distance of a wavelength",E_v(1,1,1)*N*T_D/1    !k=1
+Print*,"Distance of a wavelength",E_v(1,1,1)*N*T_S/1    !k=1
 PRINT*,"Number of C_S of one period",(E_v(1,1,1)/f)/C_S
 PRINT*,"time_step of one period", 1.0/f 
 PRINT*,"Distance = M_S*C_S [m]", M_S*C_S
@@ -211,7 +211,7 @@ DO time = 0,N
              END DO   
       END IF 
 
-!Source ( Boundary Condition )
+!Source ( Boundary Conditio2n )
 !===========================================================================      
        E_z(0,0,0) = 1-cos(2*pi*f*time)
 !       Print*,"E_z(0,0,0)=", E_z(0,0,0)    
@@ -264,22 +264,22 @@ DO time = 0,N
       DO i = 0, M_S-1
          DO j = 0, M_S-1
             DO k = 0, M_S-1
-         !n+2!  = !n+1!                                 !Time index
-       H_x(i+1,j+2,k+2) = D_a(i+1,j+2,k) * H_x(i+1,j+2,k) + &
-                        & D_b(i+1,j+2,k) * (E_y(i+1,j+2,k) - E_y(i+1,j+2,k) + &
-                                           &E_z(i+1,j+1,k) - E_z(i+1,j+3,k) - &
-                                           &M_x(i+1,j+2,k) * C_S)   
+                             !n+2!  = !n+1!                  !Time index
+                   H_x(i+1,j+2,k+2) = D_a(i+1,j+2,k) * H_x(i+1,j+2,k) + &
+                                    & D_b(i+1,j+2,k) * (E_y(i+1,j+2,k) - E_y(i+1,j+2,k) + &
+                                                       &E_z(i+1,j+1,k) - E_z(i+1,j+3,k) - &
+                                                       &M_x(i+1,j+2,k) * C_S)   
  
 
-       H_y(i+2,j+1,k+2) = D_a(i+2,j+1,k+2) * H_y(i+2,j+1,k+2)+ &
-                        & D_b(i+2,j+1,k+2) * (E_z(i+3,j+1,k+2) - E_z(i+1,j+1,k+2) + &
-                                             &E_z(i+2,j+1,k+1) - E_z(i+2,j+1,k+3) - &
-                                             &M_y(i+2,j+1,k+2)*C_S)   
+                   H_y(i+2,j+1,k+2) = D_a(i+2,j+1,k+2) * H_y(i+2,j+1,k+2)+ &
+                                    & D_b(i+2,j+1,k+2) * (E_z(i+3,j+1,k+2) - E_z(i+1,j+1,k+2) + &
+                                                         &E_z(i+2,j+1,k+1) - E_z(i+2,j+1,k+3) - &
+                                                         &M_y(i+2,j+1,k+2)*C_S)   
  
-       H_z(i+2,j+2,k+1) = D_a(i+2,j+2,k+1) * H_z(i+2,j+2,k+1) + &
-                        & D_b(i+2,j+2,k+1) * (E_x(i+2,j+3,k+1) - E_x(i+2,j+1,k+1) + & 
-                                             &E_y(i+1,j+2,k+1) - E_y(i+3,j+2,k+1)- &
-                                             &M_z(i+2,j+2,k+1) * C_S)   
+                   H_z(i+2,j+2,k+1) = D_a(i+2,j+2,k+1) * H_z(i+2,j+2,k+1) + &
+                                    & D_b(i+2,j+2,k+1) * (E_x(i+2,j+3,k+1) - E_x(i+2,j+1,k+1) + & 
+                                                         &E_y(i+1,j+2,k+1) - E_y(i+3,j+2,k+1)- &
+                                                         &M_z(i+2,j+2,k+1) * C_S)   
  
             END DO   
          END DO

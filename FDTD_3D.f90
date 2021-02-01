@@ -157,9 +157,9 @@ DO time = 0,N
 !++++++Elecric Field++++++
 !     +++++++++++++++
 
-      DO i = 1, M_S
-         DO j = 1, M_S
-            DO k = 1, M_S
+      DO i = 1, M_S-2
+         DO j = 1, M_S-2
+            DO k = 1, M_S-2
 
                  !n+1!  = !n!                                 !Time index 
                    E_x (i+2,j+1,k+1) = C_a(i+2,j+1,k+1) * E_x(i+2,j+1,k+1) + &
@@ -261,6 +261,7 @@ DO time = 0,N
 !     ++++++++++++++++    
 !++++++Magnetic Field++++++
 !     ++++++++++++++++
+<<<<<<< HEAD
       DO i = 0, M_S-1
          DO j = 0, M_S-1
             DO k = 0, M_S-1
@@ -269,6 +270,16 @@ DO time = 0,N
                                     & D_b(i+1,j+2,k) * (E_y(i+1,j+2,k) - E_y(i+1,j+2,k) + &
                                                        &E_z(i+1,j+1,k) - E_z(i+1,j+3,k) - &
                                                        &M_x(i+1,j+2,k) * C_S)   
+=======
+      DO i = 0, M_S-3
+         DO j = 0, M_S-3
+            DO k = 0, M_S-3
+         !n+2!  = !n+1!                                 !Time index
+       H_x(i+1,j+2,k+2) = D_a(i+1,j+2,k) * H_x(i+1,j+2,k) + &
+                        & D_b(i+1,j+2,k) * (E_y(i+1,j+2,k) - E_y(i+1,j+2,k) + &
+                                           &E_z(i+1,j+1,k) - E_z(i+1,j+3,k) - &
+                                           &M_x(i+1,j+2,k) * C_S)   
+>>>>>>> c6561d67b180342aa0a78c396bc3ef898feab9c6
  
 
                    H_y(i+2,j+1,k+2) = D_a(i+2,j+1,k+2) * H_y(i+2,j+1,k+2)+ &

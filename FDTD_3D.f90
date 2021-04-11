@@ -13,8 +13,8 @@ INTEGER:: time = 0
 !     +++++++++++++++++++++++++++
 !++++++Distance=C_S*Maxtrix_SIZE++++++
 !     +++++++++++++++++++++++++++
-INTEGER, PARAMETER :: M_S = 1.0d+2 !Maxtrix_SIZE, Place
-INTEGER, PARAMETER :: N = 2.0d+2   !Number of time step
+INTEGER, PARAMETER :: M_S = 0.5d+2 !Maxtrix_SIZE, Place
+INTEGER, PARAMETER :: N = 0.5d+2   !Number of time step
 REAL*8,  PARAMETER :: f = 5.0d+6   !Frequency
 
 
@@ -261,17 +261,7 @@ DO time = 0,N
 !     ++++++++++++++++    
 !++++++Magnetic Field++++++
 !     ++++++++++++++++
-<<<<<<< HEAD
-      DO i = 0, M_S-1
-         DO j = 0, M_S-1
-            DO k = 0, M_S-1
-                             !n+2!  = !n+1!                  !Time index
-                   H_x(i+1,j+2,k+2) = D_a(i+1,j+2,k) * H_x(i+1,j+2,k) + &
-                                    & D_b(i+1,j+2,k) * (E_y(i+1,j+2,k) - E_y(i+1,j+2,k) + &
-                                                       &E_z(i+1,j+1,k) - E_z(i+1,j+3,k) - &
-                                                       &M_x(i+1,j+2,k) * C_S)   
-=======
-      DO i = 0, M_S-3
+     DO i = 0, M_S-3
          DO j = 0, M_S-3
             DO k = 0, M_S-3
          !n+2!  = !n+1!                                 !Time index
@@ -279,10 +269,7 @@ DO time = 0,N
                         & D_b(i+1,j+2,k) * (E_y(i+1,j+2,k) - E_y(i+1,j+2,k) + &
                                            &E_z(i+1,j+1,k) - E_z(i+1,j+3,k) - &
                                            &M_x(i+1,j+2,k) * C_S)   
->>>>>>> c6561d67b180342aa0a78c396bc3ef898feab9c6
- 
-
-                   H_y(i+2,j+1,k+2) = D_a(i+2,j+1,k+2) * H_y(i+2,j+1,k+2)+ &
+                  H_y(i+2,j+1,k+2) = D_a(i+2,j+1,k+2) * H_y(i+2,j+1,k+2)+ &
                                     & D_b(i+2,j+1,k+2) * (E_z(i+3,j+1,k+2) - E_z(i+1,j+1,k+2) + &
                                                          &E_z(i+2,j+1,k+1) - E_z(i+2,j+1,k+3) - &
                                                          &M_y(i+2,j+1,k+2)*C_S)   

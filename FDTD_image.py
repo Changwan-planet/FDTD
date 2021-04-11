@@ -4,19 +4,22 @@ import matplotlib as mpl
 from mpl_toolkits.mplot3d import Axes3D
 
 #Path
-input_path1="/home/Changwan/Fortran/FDTD_1D_E.txt"
-input_path2="/home/Changwan/Fortran/FDTD_1D_H.txt"
-input_path3="/home/Changwan/Fortran/Source.txt"
-input_path4="/home/Changwan/Fortran/FDTD_1D_E1.txt"
-input_path5="/home/Changwan/Fortran/FDTD_1D_H1.txt"
+input_path1="/home/changwan/FDTD/FDTD_1D_E.txt"
+input_path2="/home/changwan/FDTD/FDTD_1D_H.txt"
+input_path3="/home/changwan/FDTD/Source_1D.txt"
+input_path4="/home/changwan/FDTD/FDTD_1D_E1.txt"
+input_path5="/home/changwan/FDTD/FDTD_1D_H1.txt"
 
 
 
 #Laoding
+
 #EM=np.genfromtxt(input_path,dtype=np.float)
+
 E1=np.loadtxt(input_path1, usecols=0)
 #E2=np.loadtxt(input_path1, usecols=1)
 #E3=np.loadtxt(input_path1, usecols=2)
+
 E11=np.loadtxt(input_path4, usecols=0)
 
 
@@ -24,6 +27,7 @@ E11=np.loadtxt(input_path4, usecols=0)
 M1=np.loadtxt(input_path2, usecols=0)
 #M2=np.loadtxt(input_path2, usecols=1)
 #M3=np.loadtxt(input_path2, usecols=2)
+
 M11=np.loadtxt(input_path5, usecols=0)
 
 """
@@ -76,9 +80,10 @@ S1=np.loadtxt(input_path3,usecols=0)
 
 plt.subplot(2,2,1)
 plt.plot(S1,'b',label='Source')
-plt.title("Source")
+#plt.title("Source")
 plt.grid()
 plt.minorticks_on()
+
 
 plt.subplot(2,2,2)
 plt.plot(E1,'r',label='E_z_field')

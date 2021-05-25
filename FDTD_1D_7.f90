@@ -7,8 +7,8 @@ INTEGER :: j = 0
 INTEGER :: time = 0
 
 !Distance=C_S*Maxtrix_SIZE!
-INTEGER, PARAMETER :: M_S=2.0d+5 !Maxtrix_SIZE, Place
-INTEGER, PARAMETER :: N = 2.0d+5 !Number of time step
+INTEGER, PARAMETER :: M_S=3.0d+2 !Maxtrix_SIZE, Place
+INTEGER, PARAMETER :: N = 1.0d+3 !Number of time step
 REAL*8,  PARAMETER :: f = 5.0d+6 !Frequency
 
 
@@ -36,7 +36,7 @@ REAL*8, PARAMETER :: Permeat = (4.0*pi)*(10.0)**(-7)     !! Permeativity Free sp
 
 !SI unit!
 REAL*8, PARAMETER :: E_v = 1.0 / sqrt(Permit * Permeat)
-REAL*8, PARAMETER :: C_S = 3.0        ![m]
+REAL*8, PARAMETER :: C_S = 1.0        ![m]
 REAL*8, PARAMETER :: T_D = 1.0d-9     ![s]
 
 REAL*8  ::  pp1 = (1.0d-5)/T_D
@@ -96,16 +96,16 @@ OPEN (UNIT=24,FILE="FDTD_1D_H1.txt",STATUS='replace')
       END DO
 
 !First ouput
-      IF (time==1.0/(f*T_D)) THEN
+      IF (time==1.0/(f*T_D)+100) THEN
              DO i=0,M_S
-                Write(23,*) E_z(i)
+                Write(20,*) E_z(i)
              END DO 
       END IF
 
 !Final output  
-      IF (time==N) THEN
+      IF (time==4*N/5.0) THEN
              DO i=0,M_S
-                WRITE(20,*) E_z(i)
+                WRITE(23,*) E_z(i)
                 !Write(20,100) E_z(i)
                 !100 FORMAT(E15.7)
                 !Write(20,*) Log(E_z(i)**2)  !Divergence Check
@@ -161,9 +161,9 @@ OPEN (UNIT=24,FILE="FDTD_1D_H1.txt",STATUS='replace')
 
 !One-time sources (Boundary condition)
 !===========================================================================
-IF (time<=1.0/(f*T_D)) THEN
-    E_z(0) = 1-COS(2*pi*f*time*T_D)
-END IF 
+!IF (time<=1.0/(f*T_D)) THEN
+!    E_z(0) = 1-COS(2*pi*f*time*T_D)
+!END IF 
 
 !ELSE 
 !         E_z(0) = 0

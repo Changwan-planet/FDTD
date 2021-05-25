@@ -12,20 +12,21 @@ INTEGER :: time = 0
 !     +++++++++++++++++++++++++++
 !++++++Distance=C_S*Maxtrix_SIZE++++++
 !     +++++++++++++++++++++++++++
-INTEGER, PARAMETER :: M_S = 2.0d+3 !Maxtrix_SIZE, Place
+INTEGER, PARAMETER :: M_S = 1.0d+2 !Maxtrix_SIZE, Place
                                    !This value cause the simulation program to be time-consuming.
                                    !If this is too small, it's unrealistic, but fast.
  
 INTEGER, PARAMETER :: T_M_S = M_S !This is the parameter to test the output of the source in the particualr axis.
-INTEGER, PARAMETER :: tm = 10 !Axis_test
+INTEGER, PARAMETER :: tm = 1.0d+2 !Axis_test
 
 
-INTEGER, PARAMETER :: N = 1.0d+5     !Number of time step
-!REAL*8,  PARAMETER :: f = 100.0d+6   !Frequency
-REAL*8,  PARAMETER :: f = 1.0d+5      !Frequency
+!INTEGER, PARAMETER :: N = 1.0d+5     !Number of time step
+INTEGER, PARAMETER :: N = 2.5d+2     !Number of time step
 
 
-!REAL*8,  PARAMETER :: f = 1.0d+0   !Frequency
+REAL*8,  PARAMETER :: f = 1.0d+8   !Frequency
+!REAL*8,  PARAMETER :: f = 1.0d+5      !Frequency
+
 
 
 !     +++++++++
@@ -173,7 +174,7 @@ PRINT*,"Number of C_S of one period",(E_v(1,1,1)/f)/C_S
 PRINT*,"time of one period", 1.0/f 
 PRINT*,"Distance = M_S*C_S [m]", M_S*C_S
 PRINT*,"Velocity of EM * T_S / C_S", E_v(1,1,1)*T_S/C_S
-
+PRINT*,"Distance / T_S =", E_v(1,1,1) * T_S
 
 
 !     ++++++,
@@ -247,46 +248,63 @@ DO time = 0,N
 !     +++++++++++++      
 !++++++First ouput++++++
 !     +++++++++++++
-       IF (time==1/(f*T_S)) THEN
+
+!       IF (time==1/(f*T_S)) THEN
 !      IF (time==3*1.0/(f*T_S)) THEN
 !      IF (time==1) THEN
          ! 1.0/ (f*T_S)= 200 time step = 1 Wavelenth 
+
+!       IF (time==10) THEN !Before hitting the boundary. Light can mover 3 meter during 10 T_S in free space.
          
-             DO i=0,M_S+2
-                DO j=0,tm+2
-                   DO k=0,tm+2
+!             DO i=0,M_S+2
+!                DO j=0,tm+2
+!                   DO k=0,tm+2
             
-                      WRITE(20,*) E_x(i,j,k), E_y(i,j,k), E_z(i,j,k)
+!                      WRITE(20,*) E_x(i,j,k), E_y(i,j,k), E_z(i,j,k)
                       !WRITE(20,*) Log(E_x(i,j,k))**2, Log(E_y(i,j,k))**2, Log(E_z(i,j,k))**2 !Divergence check
                
-                   END DO  
-                END DO 
-             END DO 
+!                   END DO  
+!                END DO 
+!             END DO 
 
+!      END IF
+
+       IF (time==250) THEN !Before hitting the boundary. Light can mover 3 meter during 10 T_S in free space.
+!         j=50
+!         k=50
+             DO i=0,M_S+2
+                DO j=0,tm+2
+                   DO k=0,tm+2           
+                      WRITE(20,*) E_x(i,j,k), E_y(i,j,k), E_z(i,j,k)
+                      !WRITE(20,*) Log(E_x(i,j,k))**2, Log(E_y(i,j,k))**2, Log(E_z(i,j,k))**2 !Divergence check          
+                   END DO
+                END DO
+             END DO 
       END IF
+
 
 !     ++++++++++++++      
 !++++++Final output++++++
 !     ++++++++++++++
 !     IF (time==N) THEN
-      IF (time==2*1/(f*T_S)) THEN
-             i=0
-             j=0
-             k=0
-             DO i=0,M_S+2
-                DO j=0,tm+2
-                   DO k=0,tm+2
+!      IF (time==2*1/(f*T_S)) THEN
+!             i=0
+!             j=0
+!             k=0
+!             DO i=0,M_S+2
+!                DO j=0,tm+2
+!                   DO k=0,tm+2
 
-                      WRITE(23,*) E_x(i,j,k), E_y(i,j,k), E_z(i,j,k)
+!                      WRITE(23,*) E_x(i,j,k), E_y(i,j,k), E_z(i,j,k)
                       !WRITE(23,*) Log(E_x(i,j,k))**2, Log(E_y(i,j,k))**2, Log(E_z(i,j,k))**2 !Divergence check
         
                !Write(20,100) E_z(i)
                 !100 FORMAT(E15.7)
                 !Write(20,*) Log(E_z(i)**2)  !Divergence Check
-                   END DO 
-                END DO
-             END DO   
-      END IF 
+!                   END DO 
+!                END DO
+!             END DO   
+!      END IF 
 
 !Source ( Boundary Condition )
 !===========================================================================      
@@ -307,11 +325,11 @@ DO time = 0,N
 !One-time sources (Boundary condition)
 !===========================================================================
       IF (time<=1.0/(f*T_S)) THEN
-         E_x(20,0,0) = 1-COS(2*pi*f*time*T_S)
+         E_x(50,50,50) = 1-COS(2*pi*f*time*T_S)
  !        E_y(1,4,3) = 1-COS(2*pi*f*time*T_S)
  !        J_z(10,10,10) = 1-COS(2*pi*f*time*T_S)
       ELSE 
-         E_x(20,0,0) = 0
+         E_x(50,50,50) = 0
  !        E_y(1,4,3) = 0
  !        J_z(10,10,10) = 0
       END IF  
@@ -343,7 +361,7 @@ DO time = 0,N
 
 !PRINT *, E_x(2,3,3)
 !WRITE(22,*) E_x(2,3,3), E_y(1,4,3), E_z(1,3,4)
-WRITE(22,*) E_x(20,0,0), E_y(20,0,0), E_z(20,0,0)
+WRITE(22,*) E_x(50,50,50), E_y(50,50,50), E_z(50,50,50)
 !WRITE(22,*) E_x(2,3,3), E_y(0,4,3), E_z(1,3,4)
 !WRITE(22,*) H_x(1,4,4), H_y(2,3,4), H_z(2,4,3)
  
@@ -391,38 +409,35 @@ WRITE(22,*) E_x(20,0,0), E_y(20,0,0), E_z(20,0,0)
 !     ++++++++++++++ 
 !++++++First output++++++
 !     ++++++++++++++      
-      IF(time==1.0/(f*T_S)) THEN
+!      IF(time==1.0/(f*T_S)) THEN
 !       IF(time==400) THEN
-            DO i=0,M_S+2
-               DO j=0,tm+2
-                 DO k=0,tm+2
+!            DO i=0,M_S+2
+!               DO j=0,tm+2
+!                 DO k=0,tm+2
 
-                    WRITE(24,*) H_x(i,j,k), H_y(i,j,k), H_z(i,j,k)
+!                    WRITE(24,*) H_x(i,j,k), H_y(i,j,k), H_z(i,j,k)
              
-                 END DO
-               END DO
-             END DO
-!                     WRITE(24,*) H_x(1,4,4), H_y(2,3,4), H_z(2,4,3)
-      END IF
+!                 END DO
+!               END DO
+!             END DO
+
+!      END IF
 
 !     ++++++++++++++
 !++++++Final output++++++
 !     ++++++++++++++
-      IF(time==N) THEN
-             i=0
-             j=0
-             k=0
-             DO i=0,M_S+2
-                DO j=0,tm+2
-                   DO k=0,tm+2
-                      WRITE(21,*) H_x(i,j,k), H_y(i,j,k), H_z(i,j,k)
+!      IF(time==N) THEN
+!            DO i=0,M_S+2
+!                DO j=0,tm+2
+!                   DO k=0,tm+2
+!                      WRITE(21,*) H_x(i,j,k), H_y(i,j,k), H_z(i,j,k)
                       !Write(21,100) H_y(i)
                       !Write(21,*) Log(H_y(j)**2) !Divergence Chek
              
-                   END DO
-                END DO
-             END DO   
-      END IF 
+!                   END DO
+!                END DO
+!             END DO   
+!      END IF 
 
  END DO
 

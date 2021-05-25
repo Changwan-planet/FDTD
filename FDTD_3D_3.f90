@@ -2,26 +2,25 @@ PROGRAM FDTD_3D
 IMPLICIT NONE
 
 !!!!
-
 INTEGER :: a = 0   !!X coordinate
 INTEGER :: i = 0
 INTEGER :: j = 0   
 INTEGER :: k = 0
-INTEGER:: time = 0
+INTEGER :: time = 0
 
 
 !     +++++++++++++++++++++++++++
 !++++++Distance=C_S*Maxtrix_SIZE++++++
 !     +++++++++++++++++++++++++++
-INTEGER, PARAMETER :: M_S = 2.1d+1 !Maxtrix_SIZE, Place
+INTEGER, PARAMETER :: M_S = 12.0d+1 !Maxtrix_SIZE, Place
                                    !This value is time-consuming.
                                    !If this is too small, it's unrealistic 
                                    ! but fast. 
 
+
 INTEGER, PARAMETER :: N = 1.0d+3   !Number of time step
 REAL*8,  PARAMETER :: f = 5.0d+6   !Frequency
 !REAL*8,  PARAMETER :: f = 1.0d+0   !Frequency
-
 
 
 !     +++++++++
@@ -58,12 +57,11 @@ REAL*8, PARAMETER :: pi=Acos(-1.0)
 !     ++++++++++++++++++++
 REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2), PARAMETER :: Conduct = 0.0d+0
 
-REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2), PARAMETER :: Magloss = 0.0d+0                  !Magnetic loss  
-    
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2), PARAMETER :: Magloss = 0.0d+0        
+   
 REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2), PARAMETER :: Permit = 8.854*(10.0)**(-12) 
 !Permitivity  Free space=1/(36*pi))*10**(-9) 
- 
-   
+  
 REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2), PARAMETER :: Permeat = (4.0*pi)*(10.0)**(-7) 
 !Permeativity Free space=(4*pi)*10**(-7) 
 
@@ -103,7 +101,6 @@ REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: D_a
 REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: D_b 
 
 
-
 E_v = 1.0 / sqrt(Permit* Permeat)
 
 C_a = (1.0-((Conduct*T_S)/(2.0*Permit))) / (1.0+((Conduct*T_S)/(2.0*Permit)))
@@ -140,7 +137,7 @@ PRINT*,"T_S (Time Difference) [s] ",T_S
 PRINT*,"N (Number of time_step)",N
 PRINT*,"Frequency [Hz]=", f
 PRINT*,"Wavelength (Distance of one period)",E_v(1,1,1)/f
-Print*,"Distance of a wavelength",E_v(1,1,1)*N*T_S/1    !k=1
+Print*,"Distance of a wavelength",E_v(1,1,1)*N*T_S/1                         !k=1
 PRINT*,"Number of C_S of one period",(E_v(1,1,1)/f)/C_S
 PRINT*,"time_step of one period", 1.0/f 
 PRINT*,"Distance = M_S*C_S [m]", M_S*C_S
@@ -161,8 +158,8 @@ OPEN (UNIT=24,FILE="FDTD_3D_H1.txt", STATUS='replace')
 !Left size is n+1 and Right size is n in the time domain.
 
 !     ++++++
-!++++++Time++++++    )
-!     ++++++2
+!++++++Time++++++    
+!     ++++++
 
 DO time = 0,N    
 
@@ -211,18 +208,19 @@ DO time = 0,N
 !     +++++++++++++      
 !++++++First ouput++++++
 !     +++++++++++++
+       IF (time==1.5/(f*T_S)) THEN
 !      IF (time==3*1.0/(f*T_S)) THEN
-       IF (time==1) THEN
+!      IF (time==1) THEN
          ! 1.0/ (f*T_S)= 200 time step = 1 Wavelenth 
          
              DO i=0,M_S+2
-              DO j=0,M_S+2
-               DO k=0,M_S+2
+                DO j=0,M_S+2
+                   DO k=0,M_S+2
             
-                  WRITE(23,*) E_x(i,j,k), E_y(i,j,k), E_z(i,j,k)
+                      WRITE(20,*) E_x(i,j,k), E_y(i,j,k), E_z(i,j,k)
                
-               END DO  
-              END DO 
+                   END DO  
+                END DO 
              END DO 
 
       END IF
@@ -238,7 +236,7 @@ DO time = 0,N
                 DO j=0,M_S+2
                    DO k=0,M_S+2
 
-                      WRITE(20,*) E_x(i,j,k), E_y(i,j,k), E_z(i,j,k)
+                      WRITE(23,*) E_x(i,j,k), E_y(i,j,k), E_z(i,j,k)
                 !Write(20,100) E_z(i)
                 !100 FORMAT(E15.7)
                 !Write(20,*) Log(E_z(i)**2)  !Divergence Check
@@ -247,7 +245,7 @@ DO time = 0,N
              END DO   
       END IF 
 
-!Source ( Boundary Conditio2n )
+!Source ( Boundary Condition )
 !===========================================================================      
 !       E_z(0,0,0) = 1-cos(2*pi*f*time)
 !       Print*,"E_z(0,0,0)=", E_z(0,0,0)    
@@ -255,43 +253,43 @@ DO time = 0,N
 
 !Long-time sources boudary condition(Cell_size=10000)
 !===========================================================================
-!      If (time<=(1.0d-4/T_D)) then
+!     If (time<=(1.0d-4/T_D)) then
 !          E_z(0) = 1-cos(2*pi*f*time*T_D)
-!      Else
+!     Else
 !          E_z(0) = 0
-!      End if 
+!     End if 
 !===========================================================================
 
 
 !One-time sources (Boundary condition)
 !===========================================================================
       IF (time<=1.0/(f*T_S)) THEN
- !        E_x(2,3,3) = 1-COS(2*pi*f*time*T_S)
+         E_x(2,3,3) = 1-COS(2*pi*f*time*T_S)
  !        E_y(1,4,3) = 1-COS(2*pi*f*time*T_S)
-         J_z(10,10,10) = 1-COS(2*pi*f*time*T_S)
+ !        J_z(10,10,10) = 1-COS(2*pi*f*time*T_S)
       ELSE 
- !        E_x(2,3,3) = 0
+         E_x(2,3,3) = 0
  !        E_y(1,4,3) = 0
-         J_z(10,10,10) = 0
+ !        J_z(10,10,10) = 0
       END IF  
 !===========================================================================
 
 
 !Weigted Long-time Sources (Boundary sources)
 !===========================================================================
-!        IF (time<=pp1) THEN
+!     IF (time<=pp1) THEN
 !          E_z(1,3,4) = Weight_fun1(time)*(1-cos(2*pi*f*time*T_S-pi))
 !       
-!       ELSE IF ((pp1<time).AND.(time<pp2)) THEN
+!     ELSE IF ((pp1<time).AND.(time<pp2)) THEN
 !          E_z(1,3,4) = 1-cos(2*pi*f*time*T_S)
 !
-!       ELSE IF ((pp2<=time).AND.(time<=pp3)) THEN
+!     ELSE IF ((pp2<=time).AND.(time<=pp3)) THEN
 !          E_z(1,3,4) = Weight_fun2(time)*(1-cos(2*pi*f*time*T_S+pi))
 !
-!       ELSE
+!     ELSE
 !          E_z(1,3,4) = 0
 !     
-!       END IF
+!     END IF
 !===========================================================================
 
 !Hard source 1, 
@@ -300,9 +298,7 @@ DO time = 0,N
 !         IF(time
 !     E_z(1,3,4) = E_0 * EXP(-(time-time_0)/time_decay)**2
 
-
-
-
+!PRINT *, E_x(2,3,3)
 WRITE(22,*) E_x(2,3,3), E_y(1,4,3), E_z(1,3,4)
 
 !WRITE(22,*) E_x(2,3,3), E_y(0,4,3), E_z(1,3,4)

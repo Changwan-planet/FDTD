@@ -87,22 +87,22 @@ plt.minorticks_on()
 
 plt.subplot(2,2,2)
 plt.plot(E1,'r',label='E_z_field')
-plt.title("E_z_field")
+plt.title("E_z_field, Fisrt Wavelength")
 plt.grid()
 plt.minorticks_on()
 
 plt.subplot(2,2,3)
-plt.plot(E1[0:10000],'r',label='E_z_field')
-plt.title("E_z_field [0:10000]")
+plt.plot(E11,'r',label='E_z_field after First Wavelength')
+#plt.plot(E1[0:10000],'r',label='E_z_field')
+plt.title("E_")
 plt.grid()
 plt.minorticks_on()
 
-plt.subplot(2,2,4)
-plt.plot(E1[18000:20000],'r',label='E_z_field')
-plt.title("E_z_field [18000:20000]")
-
-plt.grid()
-plt.minorticks_on()
+#plt.subplot(2,2,4)
+#plt.plot(E1[18000:20000],'r',label='E_z_field')
+#plt.title("E_z_field [18000:20000]")
+#plt.grid()
+#plt.minorticks_on()
 #=====================================
 #"""
 

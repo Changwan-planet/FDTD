@@ -21,7 +21,7 @@ INTEGER, PARAMETER :: tm = 1.0d+2 !Axis_test
 
 
 !INTEGER, PARAMETER :: N = 1.0d+5     !Number of time step
-INTEGER, PARAMETER :: N = 2.5d+2     !Number of time step
+INTEGER, PARAMETER :: N = 3.0d+2     !Number of time step
 
 
 REAL*8,  PARAMETER :: f = 1.0d+8   !Frequency
@@ -40,6 +40,7 @@ REAL*8,  PARAMETER :: f = 1.0d+8   !Frequency
 !REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: J_x = 0.0d+0    !Independent source
 !REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: J_y = 0.0d+0    !Independent source
 !REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: J_z = 0.0d+0    !Independent source
+
 
 !    +++++++++ 
 !+++++E-FILED+++++AXIS TEST
@@ -103,14 +104,14 @@ REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2), PARAMETER :: Permeat = (4.0*pi)*(1
 !     +++++++++
 REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2)  :: E_v 
 !REAL*8, PARAMETER :: C_S = 0.1                              ![m]
-REAL*8, PARAMETER :: C_S = 3                              ![m]
+REAL*8, PARAMETER :: C_S = 3                                 ![m]
 
 
                            !If this is too small, it's realistic but slow.
                            !If this is too big, it's fast but errorneous.
 
 !REAL*8, PARAMETER :: T_S = 1.0d-10                           ![s]
-REAL*8, PARAMETER :: T_S = 1.0d-9                           ![s]
+REAL*8, PARAMETER :: T_S = 1.0d-9                             ![s]
 
 
 
@@ -187,12 +188,8 @@ OPEN (UNIT=23,FILE="FDTD_3D_E1.txt", STATUS='replace')
 OPEN (UNIT=24,FILE="FDTD_3D_H1.txt", STATUS='replace')
 
 
-
-!In the Do-loop
-!Left size is n+1 and Right size is n in the time domain.
-
 !     ++++++
-!++++++Time++++++    
+!++++++TIME++++++    
 !     ++++++
 
 DO time = 0,N    
@@ -202,7 +199,11 @@ DO time = 0,N
 !     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 !++++++KEEP IN MIND THAT YOU SHOULD USE THE LEAPFROG ALGORITHM.++++++
 !     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+! 
+!    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   
+!+++++IN THE DO-LOOP, LEFT SIZE IS N+1 AND RIGHT SIZE IS N IN THE TIME DOMAIN+++++
+!    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!
 !     +++++++++++++++
 !++++++Elecric Field++++++
 !     +++++++++++++++
@@ -210,7 +211,6 @@ DO time = 0,N
       DO i = 1, M_S-2
          DO j = 1,tm-2 
             DO k = 1,tm-2
-
 
 
                  !n+1!  = !n!                                 !Time index 
@@ -269,7 +269,7 @@ DO time = 0,N
 
 !      END IF
 
-       IF (time==250) THEN !Before hitting the boundary. Light can mover 3 meter during 10 T_S in free space.
+       IF (time==200) THEN !Before hitting the boundary. Light can mover 3 meter during 10 T_S in free space.
 !         j=50
 !         k=50
              DO i=0,M_S+2
@@ -324,12 +324,21 @@ DO time = 0,N
 
 !One-time sources (Boundary condition)
 !===========================================================================
-      IF (time<=1.0/(f*T_S)) THEN
-         E_x(50,50,50) = 1-COS(2*pi*f*time*T_S)
+!      IF (time<=1.0/(f*T_S)) THEN
+       IF (time<=3*1.0/(f*T_S)) THEN
+          
+!          E_x(50,50,50) = 1
+
+         E_y(50,50,50) = 1-COS(2*pi*f*time*T_S)
+ 
+ !        E_x(50,50,50) = 1-COS(2*pi*f*time*T_S)
  !        E_y(1,4,3) = 1-COS(2*pi*f*time*T_S)
  !        J_z(10,10,10) = 1-COS(2*pi*f*time*T_S)
       ELSE 
-         E_x(50,50,50) = 0
+  
+        E_y(50,50,50) = 0
+ 
+ !       E_x(50,50,50) = 0
  !        E_y(1,4,3) = 0
  !        J_z(10,10,10) = 0
       END IF  
@@ -410,18 +419,18 @@ WRITE(22,*) E_x(50,50,50), E_y(50,50,50), E_z(50,50,50)
 !++++++First output++++++
 !     ++++++++++++++      
 !      IF(time==1.0/(f*T_S)) THEN
-!       IF(time==400) THEN
-!            DO i=0,M_S+2
-!               DO j=0,tm+2
-!                 DO k=0,tm+2
+       IF(time==200) THEN
+            DO i=0,M_S+2
+               DO j=0,tm+2
+                 DO k=0,tm+2
 
-!                    WRITE(24,*) H_x(i,j,k), H_y(i,j,k), H_z(i,j,k)
-             
-!                 END DO
-!               END DO
-!             END DO
+                    WRITE(21,*) H_x(i,j,k), H_y(i,j,k), H_z(i,j,k)
+            
+                 END DO
+               END DO
+             END DO
 
-!      END IF
+      END IF
 
 !     ++++++++++++++
 !++++++Final output++++++

@@ -16,8 +16,8 @@ input_path4="/home/changwan/FDTD/FDTD_3D_H.txt"
 # 1=x, 2=y, 3=z
 
 #Source
-S1=np.loadtxt(input_path1,usecols=0)
-#S2=np.loadtxt(input_path1,usecols=1)
+#S1=np.loadtxt(input_path1,usecols=0)
+S2=np.loadtxt(input_path1,usecols=1)
 #S3=np.loadtxt(input_path1,usecols=2)
 
 #"""
@@ -59,11 +59,20 @@ print(E1_reshape.shape)
 print(H1_reshape.shape)
 
 
+#DIRECTION CHECK OF DIPOLE ANTENNA 
+#k1 = 0.01
+#k2 = 0.02
+#E1_reshape[50,80,100] = k1
+#E1_reshape[80,100 ,50] = k2
+#print(k1)
+#print(k2)
+#print(E1_reshape[50,80,100])
+
 
 #plot the graphs
 plt.subplot(3,3,1)
-plt.plot(S1,'ro',label='Source_x')
-#plt.plot(S2,'b-',label='Source_y')
+#plt.plot(S1,'ro',label='Source_x')
+plt.plot(S2,'ro-',label='Source_y')
 #plt.plot(S3,'g+',label='Source_z')
 #plt.title("Source")
 plt.grid()
@@ -73,7 +82,7 @@ color='gist_rainbow'
 
 #"""
 plt.subplot(3,3,4)
-#plt.plot(E1_reshape[:,50,50],'ro',label='E_x_field')
+#plt.plot(E1_reshape[:,50,50],'r',label='E_x_field')
 plt.imshow(E1_reshape[:,:,50],color,label='E_x_field')
 #plt.plot(E2,'b',label='E_y_field')
 #plt.plot(E3,'g',label='E_z_field')
@@ -83,8 +92,9 @@ plt.colorbar()
 plt.minorticks_on()
 
 
+
 plt.subplot(3,3,5)
-#plt.plot(E1_reshape[:,50,50],'ro',label='E_x_field')
+#plt.plot(E1_reshape[50,50,:],'r',label='E_x_field')
 plt.imshow(E1_reshape[50,:,:],color,label='E_x_field')
 #plt.plot(E2,'b',label='E_y_field')
 #plt.plot(E3,'g',label='E_z_field')
@@ -106,7 +116,8 @@ plt.minorticks_on()
 
 
 plt.subplot(3,3,7)
-#plt.plot(E1_reshape[:,50,50],'ro',label='E_x_field')
+#CHECK THE PARALLEL OF THE MAGNETIC FIELD
+#plt.plot(H1_reshape[:,50,50],'r',label='E_x_field')
 plt.imshow(H1_reshape[:,:,50],color,label='E_x_field')
 #plt.plot(E2,'b',label='E_y_field')
 #plt.plot(E3,'g',label='E_z_field')

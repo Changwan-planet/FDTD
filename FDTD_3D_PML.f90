@@ -16,15 +16,12 @@ INTEGER, PARAMETER :: M_S = 1.0d+2 !Maxtrix_SIZE, Place
                                    !This value cause the simulation program to be time-consuming.
                                    !If this is too small, it's unrealistic, but fast.
  
-INTEGER, PARAMETER :: T_M_S = M_S !This is the parameter to test the output of the source in the particualr axis.
-INTEGER, PARAMETER :: tm = 1.0d+2 !Axis_test
-
 INTEGER, PARAMETER :: N = 3.0d+2     !Number of time step
 
 
-REAL*8, PARAMETER :: f = 5.0d+11 !500 GHz
+REAL*8, PARAMETER :: f = 5.0d+11    !500 GHz
 !REAL*8,  PARAMETER :: f = 1.0d+8   !Frequency
-!REAL*8,  PARAMETER :: f = 1.0d+5      !Frequency
+!REAL*8,  PARAMETER :: f = 1.0d+5   !Frequency
 
 
 !     +++++++++
@@ -35,11 +32,8 @@ REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2)  :: E_v
 !REAL*8, PARAMETER :: C_S = 0.3                               ![m]
 REAL*8, PARAMETER :: C_S = 6.0d-5                            ![m]
 
-
-
-                           !If this is too small, it's realistic but slow.
-                           !If this is too big, it's fast but errorneous.
-
+!If this is too small, it's realistic but slow.
+!If this is too big, it's fast but errorneous.
 
 REAL*8, PARAMETER :: T_S = 1.0d-14                           ![s]
 !REAL*8, PARAMETER :: T_S = 1.0d-10                           ![s]
@@ -49,51 +43,26 @@ REAL*8, PARAMETER :: T_S = 1.0d-14                           ![s]
 !     +++++++++
 !++++++E-FIELD++++++
 !     +++++++++ 
-!REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: E_x = 0.0d+0
-!REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: E_y = 0.0d+0
-!REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: E_z = 0.0d+0
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: E_x = 0.0d+0
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: E_y = 0.0d+0
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: E_z = 0.0d+0
 
 
-!REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: J_x = 0.0d+0    !Independent source
-!REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: J_y = 0.0d+0    !Independent source
-!REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: J_z = 0.0d+0    !Independent source
-
-
-!    +++++++++ 
-!+++++E-FILED+++++AXIS TEST
-!    +++++++++
-REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: E_x = 0.0d+0
-REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: E_y = 0.0d+0
-REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: E_z = 0.0d+0
-
-
-REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: J_x = 0.0d+0    !Independent source
-REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: J_y = 0.0d+0    !Independent source
-REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: J_z = 0.0d+0    !Independent source
-
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: J_x = 0.0d+0    !Independent source
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: J_y = 0.0d+0    !Independent source
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: J_z = 0.0d+0    !Independent source
 
 !     +++++++++
 !++++++H-FIELD++++++
 !     +++++++++
-!REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: H_x = 0.0d+0
-!REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: H_y = 0.0d+0
-!REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: H_z = 0.0d+0
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: H_x = 0.0d+0
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: H_y = 0.0d+0
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: H_z = 0.0d+0
 
 
-!REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: M_x = 0.0d+0    !Independent source 
-!REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: M_y = 0.0d+0    !Independent source 
-!REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: M_z = 0.0d+0    !Independent source 
-
-!     +++++++++
-!++++++H-FIELD++++++AXIS TEST
-!     +++++++++
-REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: H_x = 0.0d+0
-REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: H_y = 0.0d+0
-REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: H_z = 0.0d+0
-
-REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: M_x = 0.0d+0    !Independent source 
-REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: M_y = 0.0d+0    !Independent source 
-REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: M_z = 0.0d+0    !Independent source 
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: M_x = 0.0d+0    !Independent source 
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: M_y = 0.0d+0    !Independent source 
+REAL*8, DIMENSION(0:M_S+2, 0:M_S+2, 0:M_S+2) :: M_z = 0.0d+0    !Independent source 
 
 
 
@@ -109,6 +78,40 @@ REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2), PARAMETER :: Permit = 8.854*(10.0)
 !Permitivity  Free space=1/(36*pi))*10**(-9)  
 REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2), PARAMETER :: Permeat = (4.0*pi)*(10.0)**(-7) 
 !Permeativity Free space=(4*pi)*10**(-7) 
+
+
+
+!     ++++++++++++++
+!++++++BERENGER'PML++++++
+!     ++++++++++++++
+
+INTEGER*8 :: g =2.5     !Scaling factor
+
+INTEGER*8, PARAMETER :: PML_x = 10
+INTEGER*8, PARAMETER :: PML_y = 10
+INTEGER*8, PARAMETER :: PML_z = 10
+
+REAL*8 :: PML_Permeat_0 = 8.854*(10.0)**(-12)
+REAL*8 :: PML_Conduct_0 = 
+
+REAL*8, DIMENSION(0:9) :: PML_Conduct_x,PML_Conduct_y, PML_Conduct_z 
+REAL*8, DIMENSION(0:9) :: PML_KAPPA_x,PML_KAPPA__y, PML_KAPPA_z 
+REAL*8 :: K_max
+
+REAL*8, DIMENSION(0:9) :: C1_x, C1_y, C1_z
+REAL*8, DIMENSION(0:9) :: C2_x, C2_y, C2_z
+REAL*8, DIMENSION(0:9) :: C3_x, C3_y, C3_z
+REAL*8, DIMENSION(0:9) :: C4_x, C4_y, C4_z
+REAL*8, DIMENSION(0:9) :: C5_x, C5_y, C5_z
+REAL*8, DIMENSION(0:9) :: C6_x, C6_y, C6_z
+
+REAL*8, DIMENSION(0:9,0:9,0:9) :: EFD_x !Electric flux density
+REAL*8, DIMENSION(0:9,0:9,0:9) :: EFD_y !Electric flux density
+REAL*8, DIMENSION(0:9,0:9,0:9) :: EFD_z !Electric flux density
+
+REAL*8, DIMENSION(0:9,0:9,0:9) :: MFD_x !Magnetic flux density
+REAL*8, DIMENSION(0:9,0:9,0:9) :: MFD_y !Magnetic flux density
+REAL*8, DIMENSION(0:9,0:9,0:9) :: MFD_z !Magnetic flux density
 
 
 !Lunar environment!
@@ -128,7 +131,6 @@ REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2), PARAMETER :: Permeat = (4.0*pi)*(1
 REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: C_a 
 REAL*8, DIMENSION(0:T_M_S+2, 0:tm+2, 0:tm+2) :: C_b 
 
-
 !     +++++++++++++++++++
 !++++++H-Field Component++++++
 !     +++++++++++++++++++
@@ -144,7 +146,7 @@ C_b = (T_S/(Permit*C_S)) / (1.0+(Conduct*T_S/(2.0*Permit)))
 D_a = (1.0-((Magloss*T_S)/(2.0*Permeat))) / (1.0+((Magloss*T_S)/(2.0*Permeat)))
 D_b = (T_S/(Permeat*C_S)) / (1.0+(Magloss*T_S/(2.0*Permeat)))
  
-    
+ 
 PRINT*,"Permit(1,1,1)",Permit(1,1,1)
 PRINT*,"Permeat(1,1,1)",Permeat(1,1,1)
 PRINT*,"Conduct(1,1,1)",Conduct(1,1,1)
@@ -188,6 +190,103 @@ OPEN (UNIT=21,FILE="FDTD_3D_H.txt", STATUS='replace')
 OPEN (UNIT=22,FILE="Source_3D.txt", STATUS='replace')
 OPEN (UNIT=23,FILE="FDTD_3D_E1.txt", STATUS='replace')
 OPEN (UNIT=24,FILE="FDTD_3D_H1.txt", STATUS='replace')
+
+DO i=0,9
+
+PML_Conduct_x = (g^(1/C_S)^(C_ * PML_Conduct_0
+PML_Conduct_y = (g^(1/C_S)^y * PML_Conduct_0
+PML_Conduct_z = (g^(1/C_S)^z * PML_Conduct_0
+
+PML_KAPPA_x = ((K_max)^(1/x) * g^(1/C_S))^x
+PML_KAPPA_y = ((K_max)^(1/y) * g^(1/C_S))^y
+PML_KAPPA_z = ((K_max)^(1/z) * g^(1/C_S))^z
+
+
+
+
+!     ++++++++++++++++++++++++
+!++++++Berenger'PML Parameter++++++
+!     ++++++++++++++++++++++++
+DO i=0,9
+
+C1_x(i) = (2*PML_Permeat_0*PML_KAPPA_y(i) - PML_Conduct_y(i)*T_S) / &
+             &(2*PML_Permeat_0*PML_KAPPA_y(i) + PML_Conduct_y(i)*T_S)
+C2_x(i) = (2*PML_Permeat_0*T_S) / &
+             &(2*PML_Permeat_0*PML_KAPPA_y(i) + PML_Conduct_y(i)*T_S)
+
+C3_x(i) = (2*PML_Permeat_0*PML_KAPPA_z(i) - PML_Conduct_z(i)*T_S) / &
+             &(2*PML_Permeat_0*PML_KAPPA_z(i) + PML_Conduct_z(i)*T_S)
+C4_x(i) = 1 /(2*PML_Permeat_0*PML_KAPPA_z(i) + PML_Conduct_z(i)*T_S)
+C5_x(i) = 2*PML_Permeat_0*PML_KAPPA_x(i) + PML_Conduct_x(i)*T_S
+C6_x(i) = 2*PML_Permeat_0*PML_KAPPA_x(i) - PML_Conduct_x(i)*T_S
+
+END DO
+
+DO j=0,9
+
+C1_y(j) = (2*PML_Permeat_0*PML_KAPPA_z(j) - PML_Conduct_z(j)*T_S) / &
+             &(2*PML_Permeat_0*PML_KAPPA_z(j) + PML_Conduct_z(j)*T_S)
+C2_y(j) = (2*PML_Permeat_0*T_S) / &
+             &(2*PML_Permeat_0*PML_KAPPA_z(j) + PML_Conduct_z(j)*T_S)
+C3_y(j) = (2*PML_Permeat_0*PML_KAPPA_x(j) - PML_Conduct_x(j)*T_S) / &
+             &(2*PML_Permeat_0*PML_KAPPA_x(j) + PML_Conduct_x(j)*T_S)
+C4_y(j) = 1 /(2*PML_Permeat_0*PML_KAPPA_x(j) + PML_Conduct_x(j)*T_S)
+C5_y(j) = 2*PML_Permeat_0*PML_KAPPA_y(j) + PML_Conduct_y(j)*T_S
+C6_y(j) = 2*PML_Permeat_0*PML_KAPPA_y(j) - PML_Conduct_y(j)*T_S
+
+END DO
+
+DO j=0,9
+
+C1_z(j) = (2*PML_Permeat_0*PML_KAPPA_x(j) - PML_Conduct_x(j)*T_S) / &
+             &(2*PML_Permeat_0*PML_KAPPA_x(j) + PML_Conduct_x(j)*T_S)
+C2_z(j) = (2*PML_Permeat_0*T_S) / &
+             &(2*PML_Permeat_0*PML_KAPPA_x(j) + PML_Conduct_x(j)*T_S)
+C3_z(j) = (2*PML_Permeat_0*PML_KAPPA_y(j) - PML_Conduct_y(j)*T_S) / &
+             &(2*PML_Permeat_0*PML_KAPPA_y(j) + PML_Conduct_y(j)*T_S)
+C4_z(j) = 1 /(2*PML_Permeat_0*PML_KAPPA_y(j) + PML_Conduct_xyj)*T_S)
+C5_z(j) = 2*PML_Permeat_0*PML_KAPPA_z(j) + PML_Conduct_z(j)*T_S
+C6_z(j) = 2*PML_Permeat_0*PML_KAPPA_z(j) - PML_Conduct_z(j)*T_S
+
+END DO
+
+!     +++++++++
+!++++++E-Field++++++
+!     +++++++++
+EFD_x(i+1,j,k) = C1_x(i) * EFD(i+1,j,k) &
+             &+C2_x(i) * ( ( H_z(i,+1,j+1,k)-H_z(i+1,j-1,k)) / C_S - (H_y(i+1,j,k+1) - H_y(i+1,j,k-1) )/ C_S )
+EFD_y(i,j,k) = C1_y(i) * EFD(i+1,j,k) &
+             &+C2_y(i) * ( ( H_x(i,+1,j+1,k)-H_x(i+1,j-1,k)) / C_S - (H_z(i+1,j,k+1) - H_z(i+1,j,k-1) )/ C_S )
+EFD_z(i,j,k) = C1_z(i) * EFD(i+1,j,k) &
+             &+C2_z(i) * ( ( H_y(i,+1,j+1,k)-H_y(i+1,j-1,k)) / C_S - (H_x(i+1,j,k+1) - H_x(i+1,j,k-1) )/ C_S )
+
+
+E_x(i+1,j,k) = C3_x(i)*E_x(i+1,j,k) &
+             &+(C4_x(i)*(C5_x(i)*EFD_x(i+1,j,k) - C6_x(i)*EFD_x(i+1,j,k))
+E_y(i+1,j,k) = C3_y(i)*E_x(i+1,j,k) &
+             &+(C4_y(i)*(C5_y(i)*EFD_y(i+1,j,k) - C6_y(i)*EFD_y(i+1,j,k))
+E_z(i+1,j,k) = C3_z(i)*E_x(i+1,j,k) &
+             &+(C4_z(i)*(C5_z(i)*EFD_z(i+1,j,k) - C6_z(i)*EFD_z(i+1,j,k))
+
+
+!     +++++++++
+!++++++H-Field++++++
+!     +++++++++
+MFD_x(i+1,j,k) = C1_x(i) * MFD(i+1,j,k) &
+             &+C2_x(i) * ( ( E_z(i,+1,j+1,k)-E_z(i+1,j-1,k)) / C_S - (E_y(i+1,j,k+1) - E_y(i+1,j,k-1) )/ C_S )
+MFD_y(i,j,k) = C1_y(i) * MFD(i+1,j,k) &
+             &+C2_y(i) * ( ( E_x(i,+1,j+1,k)-E_x(i+1,j-1,k)) / C_S - (E_z(i+1,j,k+1) - E_z(i+1,j,k-1) )/ C_S )
+MFD_z(i,j,k) = C1_z(i) * MFD(i+1,j,k) &
+             &+C2_z(i) * ( ( E_y(i,+1,j+1,k)-E_y(i+1,j-1,k)) / C_S - (E_x(i+1,j,k+1) - E_x(i+1,j,k-1) )/ C_S )
+
+
+H_x(i+1,j,k) = C3_x(i)*H_x(i+1,j,k) &
+             &+(C4_x(i)*(C5_x(i)*MFD_x(i+1,j,k) - C6_x(i)*MFD_x(i+1,j,k))
+H_y(i+1,j,k) = C3_y(i)*H_x(i+1,j,k) &
+             &+(C4_y(i)*(C5_y(i)*MFD_y(i+1,j,k) - C6_y(i)*MFD_y(i+1,j,k))
+H_z(i+1,j,k) = C3_z(i)*H_x(i+1,j,k) &
+             &+(C4_z(i)*(C5_z(i)*MFD_z(i+1,j,k) - C6_z(i)*MFD_z(i+1,j,k))
+
 
 
 !     ++++++
